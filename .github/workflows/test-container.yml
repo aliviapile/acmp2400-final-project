@@ -1,0 +1,31 @@
+name: Test Container
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-container:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t hello-final .
+
+      - name: Run Docker container
+        run: docker run -d --name hello-final-container --env DJANGO_SECRET_KEY=testsecretkey -p 8000:8000 hello-final
+
+      - name: Wait for container to start
+        run: sleep 10
+
+      - name: Test app with curl
+        run: curl --fail http://localhost:8000
+
+      - name: Show container logs if needed
+        if: failure()
+        run: docker logs hello-final-container
