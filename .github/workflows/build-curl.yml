@@ -21,7 +21,7 @@ jobs:
 
       - name: wait_for_app
         run: |
-          sleep 10
+          sleep 20
 
       - name: curl_test
         run: |
