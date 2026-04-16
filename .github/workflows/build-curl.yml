@@ -37,4 +37,5 @@ jobs:
           exit 1
 
       - name: Show container logs
+        if: always()
         run: docker logs test-container
