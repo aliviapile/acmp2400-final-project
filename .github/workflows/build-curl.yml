@@ -1,41 +1,40 @@
-name: Build-Curl
+name: Build and Curl
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build-and-curl:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: docker_build
-        run: |
-          docker build -t pipeline-test ./ACMP2400
+      - name: Build Docker image
+        run: docker build -t myapp .
 
-      - name: docker_run
-        env:
-          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-        run: |
-          docker run -d -p 8000:8000 \
-            -e DJANGO_SECRET_KEY="$DJANGO_SECRET_KEY" \
-            --name test-container pipeline-test
+      - name: Run container
+        run: docker run -d -p 8000:8000 --name myapp myapp
 
-      - name: wait_for_app
+      - name: Show running containers
+        run: docker ps -a
+
+      - name: Show container logs
+        run: docker logs myapp
+
+      - name: Wait for app
         run: |
           for i in {1..30}; do
-            if curl -f http://localhost:8000/ 2>/dev/null; then
-              echo "App is ready"
+            if curl -f http://localhost:8000; then
               exit 0
             fi
             echo "Waiting for app to start... ($i/30)"
             sleep 2
           done
           echo "App failed to start"
+          docker logs myapp
           exit 1
-
-      - name: Show container logs
-        if: always()
-        run: docker logs test-container
