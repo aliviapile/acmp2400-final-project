@@ -21,11 +21,20 @@ jobs:
 
       - name: wait_for_app
         run: |
-          sleep 20
-
-      - name: curl_test
-        run: |
-          curl -f http://localhost:8000/
+          max_attempts=30
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            if curl -f http://localhost:8000/ 2>/dev/null; then
+              echo "Application is healthy"
+              exit 0
+            fi
+            echo "Attempt $attempt/$max_attempts: Application not ready yet, retrying in 2 seconds..."
+            sleep 2
+            attempt=$((attempt + 1))
+          done
+          echo "Application failed to become ready after 60 seconds"
+          docker logs test-container
+          exit 1
 
       - name: Show container logs if needed
         if: failure()
