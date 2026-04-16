@@ -21,18 +21,15 @@ jobs:
 
       - name: wait_for_app
         run: |
-          max_attempts=30
-          attempt=1
-          while [ $attempt -le $max_attempts ]; do
+          for i in {1..30}; do
             if curl -f http://localhost:8000/ 2>/dev/null; then
-              echo "Application is healthy"
+              echo "App is ready"
               exit 0
             fi
-            echo "Attempt $attempt/$max_attempts: Application not ready yet, retrying in 2 seconds..."
+            echo "Waiting for app to start... ($i/30)"
             sleep 2
-            attempt=$((attempt + 1))
           done
-          echo "Application failed to become ready after 60 seconds"
+          echo "App failed to start"
           docker logs test-container
           exit 1
 
