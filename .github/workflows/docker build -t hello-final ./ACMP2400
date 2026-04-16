@@ -14,8 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: docker_build
-      - name: docker_build
-      run: |
+        run: |
           docker build -t pipeline-test ./ACMP2400
 
       - name: docker_run
