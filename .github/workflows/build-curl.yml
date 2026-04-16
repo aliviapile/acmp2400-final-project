@@ -38,3 +38,13 @@ jobs:
           echo "App failed to start"
           docker logs myapp
           exit 1
+
+  sbom-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run SBOM scan
+        uses: ./.github/actions/sbom-scan
