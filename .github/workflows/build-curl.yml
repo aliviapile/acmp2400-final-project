@@ -30,9 +30,9 @@ jobs:
             sleep 2
           done
           echo "App failed to start"
-          docker logs test-container
           exit 1
 
-      - name: Show container logs if needed
-        if: failure()
+   
+      - name: Show container logs
         run: docker logs test-container
+
