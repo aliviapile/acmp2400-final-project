@@ -1,8 +1,3 @@
-variable "ARM_SUBSCRIPTION_ID" {}
-variable "ARM_TENANT_ID" {}
-variable "ARM_CLIENT_ID" {}
-variable "ARM_CLIENT_SECRET" {}
-
 terraform {
   required_providers {
     azurerm = {
@@ -22,11 +17,7 @@ terraform {
 
 provider "azurerm" {
   features {}
-
-  subscription_id = var.ARM_SUBSCRIPTION_ID
-  tenant_id       = var.ARM_TENANT_ID
-  client_id       = var.ARM_CLIENT_ID
-  client_secret   = var.ARM_CLIENT_SECRET
+  subscription_id = "f9dd3451-71c1-4bd8-84f8-c83195ce534e"
 }
 
 resource "azurerm_container_registry" "aliviapile_acr" {
