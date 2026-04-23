@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-cd /github/workspace
+cd /github/workspace/terraform
 
 echo "Running Terraform..."
 
