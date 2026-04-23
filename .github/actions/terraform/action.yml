@@ -1,11 +1,5 @@
 name: "Terraform Action"
-description: "Run Terraform commands in a custom container action"
-inputs:
-  tf-command:
-    description: "Terraform command to run"
-    required: true
+description: "Runs terraform init and terraform plan"
 runs:
   using: "docker"
   image: "Dockerfile"
-  args:
-    - ${{ inputs.tf-command }}
