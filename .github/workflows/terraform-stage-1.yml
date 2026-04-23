@@ -1,0 +1,15 @@
+name: terraform-stage-1
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-stage-1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run terraform action
+        uses: ./.github/actions/terraform
