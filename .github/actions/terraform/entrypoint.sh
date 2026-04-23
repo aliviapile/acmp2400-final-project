@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-echo "Running Terraform command: $1"
-terraform version
-terraform $1
+cd /github/workspace/terraform
+
+terraform init
+terraform plan
