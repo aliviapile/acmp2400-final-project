@@ -1,7 +1,17 @@
 #!/bin/sh
 set -e
 
-cd /github/workspace/terraform
+echo "Current directory:"
+pwd
+
+echo "Listing files:"
+ls -la
+
+cd terraform
+
+echo "Now inside terraform folder:"
+pwd
+ls -la
 
 echo "Running Terraform..."
 
