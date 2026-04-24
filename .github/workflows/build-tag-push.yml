@@ -21,7 +21,7 @@ jobs:
         run: docker build -t final ./ACMP2400
 
       - name: Tag image
-        run: docker tag final acraliviapileacmp2400.azurecr.io/final:latest
+        run: docker tag final acrapileacmp2400.azurecr.io/final:latest
 
       - name: Push image
-        run: docker push acraliviapileacmp2400.azurecr.io/final:latest
+        run: docker push acrapileacmp2400.azurecr.io/final:latest
