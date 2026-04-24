@@ -20,7 +20,7 @@ provider "azurerm" {
   subscription_id = "f9dd3451-71c1-4bd8-84f8-c83195ce534e"
 }
 
-resource "azurerm_container_registry" "aliviapile_acr" {
+resource "azurerm_container_registry" "apile_acr" {
   name                = "acapileacmp2400"
   resource_group_name = "rg-aliviapile"
   location            = "Central US"
