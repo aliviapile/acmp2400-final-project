@@ -1,0 +1,27 @@
+name: build-tag-push
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-tag-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure Container Registry
+        run: |
+          docker login acraliviapileacmp2400.azurecr.io \
+          -u ${{ secrets.ARM_CLIENT_ID }} \
+          -p ${{ secrets.ARM_CLIENT_SECRET }}
+
+      - name: Build Docker image
+        run: docker build -t final ./ACMP2400
+
+      - name: Tag image
+        run: docker tag final acraliviapileacmp2400.azurecr.io/final:latest
+
+      - name: Push image
+        run: docker push acraliviapileacmp2400.azurecr.io/final:latest
