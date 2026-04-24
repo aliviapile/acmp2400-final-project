@@ -21,7 +21,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_container_registry" "aliviapile_acr" {
-  name                = "acraliviapileacmp2400"
+  name                = "acapileacmp2400"
   resource_group_name = "rg-aliviapile"
   location            = "Central US"
   sku                 = "Basic"
