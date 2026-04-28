@@ -25,5 +25,5 @@ resource "azurerm_container_registry" "apile_acr" {
   resource_group_name = "rg-apile"
   location            = "Central US"
   sku                 = "Basic"
-  admin_enabled       = false
+  admin_enabled       = true
 }
