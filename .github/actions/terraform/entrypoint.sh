@@ -19,3 +19,11 @@ elif [[ "$TF_STAGE" == "terraform/stage2" ]]; then
   terraform -chdir=${TF_STAGE} plan -out=${TF_STAGE}.tfplan
   terraform -chdir=${TF_STAGE} apply ${TF_STAGE}.tfplan
 fi
+elif [[ "$INPUT_TF_STAGE" == "stage3" ]]; then
+  terraform -chdir=terraform/stage2 init -backend-config="key=${INPUT_STATE_KEY}.tfstate"
+
+  terraform -chdir=terraform/stage2 destroy -auto-approve \
+    -var="ARM_CLIENT_ID=${INPUT_ARM_CLIENT_ID}" \
+    -var="ARM_CLIENT_SECRET=${INPUT_ARM_CLIENT_SECRET}" \
+    -var="DJANGO_SECRET_KEY_PROD=${INPUT_DJANGO_SECRET_KEY_PROD}"
+fi
