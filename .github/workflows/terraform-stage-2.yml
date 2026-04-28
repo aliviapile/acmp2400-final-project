@@ -20,3 +20,10 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           STATE_KEY: apile
           TF_STAGE: stage2
+      - name: Wait for container app
+        run: |
+          sleep 30
+
+      - name: Test deployed container
+        run: |
+          curl -f http://acmp-apile-instance.centralus.azurecontainer.io:8000
