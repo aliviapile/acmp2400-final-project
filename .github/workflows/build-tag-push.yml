@@ -20,8 +20,8 @@ jobs:
       - name: Build Docker image
         run: docker build -t final ./ACMP2400
 
-      - name: Tag Docker image
+      - name: Tag image
         run: docker tag final acapileacmp2400.azurecr.io/final:latest
 
-      - name: Push Docker image
+      - name: Push image
         run: docker push acapileacmp2400.azurecr.io/final:latest
