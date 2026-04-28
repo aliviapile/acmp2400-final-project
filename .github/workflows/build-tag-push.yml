@@ -14,14 +14,14 @@ jobs:
       - name: Login to Azure Container Registry
         run: |
           docker login acapileacmp2400.azurecr.io \
-          -u ${{ secrets.ARM_CLIENT_ID }} \
-          -p ${{ secrets.ARM_CLIENT_SECRET }}
+            -u ${{ secrets.ACR_USERNAME }} \
+            -p ${{ secrets.ACR_PASSWORD }}
 
       - name: Build Docker image
         run: docker build -t final ./ACMP2400
 
-      - name: Tag image
+      - name: Tag Docker image
         run: docker tag final acapileacmp2400.azurecr.io/final:latest
 
-      - name: Push image
+      - name: Push Docker image
         run: docker push acapileacmp2400.azurecr.io/final:latest
