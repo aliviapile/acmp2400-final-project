@@ -13,9 +13,9 @@ jobs:
 
       - name: Login to Azure Container Registry
         run: |
-          docker login acapileacmp2400.azurecr.io \
-            -u ${{ secrets.ACR_USERNAME }} \
-            -p ${{ secrets.ACR_PASSWORD }}
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login acapileacmp2400.azurecr.io \
+            --username "${{ secrets.ACR_USERNAME }}" \
+            --password-stdin
 
       - name: Build Docker image
         run: docker build -t final ./ACMP2400
