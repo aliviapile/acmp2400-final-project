@@ -1,0 +1,23 @@
+name: terraform-stage-3
+
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-stage-3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Destroy Terraform Resources
+        uses: ./.github/actions/terraform
+        with:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          DJANGO_SECRET_KEY_PROD: ${{ secrets.DJANGO_SECRET_KEY_PROD }}
+          STATE_KEY: apile
+          TF_STAGE: stage3
