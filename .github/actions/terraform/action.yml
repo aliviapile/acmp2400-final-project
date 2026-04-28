@@ -1,5 +1,24 @@
-name: "Terraform Action"
-description: "Runs terraform init and terraform plan"
+name: Terraform Action
+description: Runs Terraform stages
+
+inputs:
+  ARM_CLIENT_ID:
+    required: true
+  ARM_CLIENT_SECRET:
+    required: true
+  ARM_SUBSCRIPTION_ID:
+    required: true
+  ARM_TENANT_ID:
+    required: true
+  STATE_KEY:
+    required: true
+  TF_STAGE:
+    required: true
+  ACR_USERNAME:
+    required: false
+  ACR_PASSWORD:
+    required: false
+
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: docker
+  image: Dockerfile
